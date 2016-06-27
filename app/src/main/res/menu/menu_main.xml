@@ -1,14 +1,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto"
-      xmlns:tools="http://schemas.android.com/tools"
-      tools:context=".Activity.MainActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Activity.MainActivity">
     <item
         android:id="@+id/spinner"
         android:title="ActionBar Spinner"
         app:actionViewClass="android.widget.Spinner"
         android:background="#ffffff"
         app:showAsAction="always" />
-   <item
+    <item
         android:id="@+id/refresh"
         android:orderInCategory="100"
         android:icon="@mipmap/refersh1"

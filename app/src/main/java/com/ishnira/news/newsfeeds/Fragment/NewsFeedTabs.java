@@ -1,15 +1,16 @@
 package com.ishnira.news.newsfeeds.Fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ishnira.news.newsfeeds.Adapter.TabsPagerAdapter;
 import com.ishnira.news.newsfeeds.R;
+import com.ishnira.news.newsfeeds.views.SlidingTabLayout;
 
 
 /**
@@ -17,34 +18,50 @@ import com.ishnira.news.newsfeeds.R;
  */
 public class NewsFeedTabs extends Fragment {
 
-    View contact_setupview;
-    TabLayout tabLayout;
-    ViewPager viewPager;
+  private SlidingTabLayout mSlidingTabLayout;
 
-    @Nullable
+
+    private ViewPager mViewPager;
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-
-        contact_setupview = inflater.inflate(R.layout.pagersetup,null);
-
-        viewPager = (ViewPager) contact_setupview.findViewById(R.id.tabanim_viewpager);
-        setupViewPager(viewPager);
-
-        tabLayout = (TabLayout) contact_setupview.findViewById(R.id.tabanim_tabs);
-        tabLayout.setupWithViewPager(viewPager);
-
-        return contact_setupview;
+    public void onCreate(Bundle savedInstanceState) {
+        // TODO Auto-generated method stub
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
     }
 
-    private void setupViewPager(ViewPager viewPager) {
-        PagerAdapter adapter = new PagerAdapter(getChildFragmentManager());
-        adapter.addFrag(new News(), " Social ");
-        adapter.addFrag(new AboutUs(), " Educational ");
-        adapter.addFrag(new MyFavorite(), " Sports ");
-       // adapter.addFrag(new Weather()," Weather");
 
-
-        viewPager.setAdapter(adapter);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_sample, container, false);
     }
+
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        setUpPager(view);
+        setUpTabColor();
+    }
+    void setUpPager(View view){
+        mViewPager = (ViewPager) view.findViewById(R.id.viewpager);
+        mViewPager.setAdapter(new TabsPagerAdapter(getActivity()));
+        mSlidingTabLayout = (SlidingTabLayout) view.findViewById(R.id.sliding_tabs);
+        mSlidingTabLayout.setViewPager(mViewPager);
+    }
+    void setUpTabColor(){
+        mSlidingTabLayout.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
+            @Override
+            public int getIndicatorColor(int position) {
+                // TODO Auto-generated method stub
+                return Color.YELLOW;
+            }
+            @Override
+            public int getDividerColor(int position) {
+                // TODO Auto-generated method stub
+                return Color.WHITE;
+            }
+        });
+    }
+
 }
